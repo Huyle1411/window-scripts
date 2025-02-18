@@ -2,7 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.1.0] - 2024-03-21
+## [2.2.0] - 2025-02-18
+
+### Changed
+- Simplified project structure by removing package installation requirement
+- Removed ProblemData class in favor of direct JSON handling
+- Changed logging to write to log.txt file
+- Fixed command argument handling in cptool.cmd
+
+### Added
+- Basic .gitignore file for Python cache
+- Individual command scripts (dl.cmd, run.cmd, test.cmd)
+
+### Fixed
+- Fixed version display in CLI
+- Fixed relative import issues
+- Fixed argument passing in command scripts
+
+## [2.1.0] - 2024-02-17
 
 ### Changed
 - Restructured project into proper Python package

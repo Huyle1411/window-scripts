@@ -1,28 +1,19 @@
 import argparse
 import json
 import logging
-from dataclasses import dataclass
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 import re
 import shutil
 import sys
 
+sys.path.append(str(Path(__file__).parent.parent.parent))
+
 from cp_tool.config import *
-from cp_tool.version import CURRENT_VERSION  # or __version__ if using simple string
+from cp_tool.version import VERSION
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class ProblemData:
-    name: str
-    group: str
-    url: Optional[str]
-    tests: List[dict]
-    input: dict
-    output: dict
 
 
 class CompetitiveProgrammingError(Exception):
@@ -74,8 +65,8 @@ class CompetitiveCompanionHandler(SimpleHTTPRequestHandler):
 
 class TestCaseDownloader:
     def __init__(self):
-        self.init_logger()
-        self.version = CURRENT_VERSION
+        self.init_logger("log.txt")
+        self.version = VERSION
 
     @staticmethod
     def init_logger(log_file: Optional[Path] = None) -> None:
@@ -87,29 +78,29 @@ class TestCaseDownloader:
     def get_version(self) -> str:
         return str(self.version)
 
-    def get_problem_name(self, data: ProblemData) -> str:
+    def get_problem_name(self, data: dict) -> str:
         # USACO specific handling
-        if "USACO" in data.group:
-            if "fileName" in data.input:
+        if "USACO" in data.get("group", ""):
+            if "fileName" in data.get("input", {}):
                 names = [
-                    data.input["fileName"].rstrip(".in"),
-                    data.output["fileName"].rstrip(".out"),
+                    data["input"]["fileName"].rstrip(".in"),
+                    data["output"]["fileName"].rstrip(".out"),
                 ]
                 if len(set(names)) == 1:
                     return names[0]
 
         # CodeChef specific handling
-        if data.url and data.url.startswith("https://www.codechef.com"):
-            return data.url.rstrip("/").rsplit("/")[-1]
+        if data.get("url", "").startswith("https://www.codechef.com"):
+            return data["url"].rstrip("/").rsplit("/")[-1]
 
         # General case
-        pattern_match = re.compile(NAME_PATTERN).search(data.name)
+        pattern_match = re.compile(NAME_PATTERN).search(data.get("name", ""))
         if pattern_match:
             return pattern_match.group(1)
 
         logger.info(
             "Could not automatically determine problem name: %s",
-            json.dumps(data.__dict__, indent=2),
+            json.dumps(data, indent=2),
         )
         return input("Enter name for this problem: ")
 
@@ -126,7 +117,7 @@ class TestCaseDownloader:
                 raise ProblemCreationError("Both data and folder name are invalid")
 
             if not problem_name:
-                problem_name = self.get_problem_name(ProblemData(**json_data))
+                problem_name = self.get_problem_name(json_data)
 
             logger.info("Creating problem folder: %s", problem_name)
 
@@ -217,8 +208,8 @@ def main():
     parser.add_argument(
         "--version",
         "-v",
-        action="version",  # Changed to use built-in version action
-        version=f"%(prog)s {CURRENT_VERSION}",
+        action="version",
+        version=f"%(prog)s {VERSION}",
     )
     parser.add_argument("--prepare", "-p", nargs="+", help="create problem folder")
     parser.add_argument(
@@ -230,10 +221,6 @@ def main():
 
     args = parser.parse_args()
     downloader = TestCaseDownloader()
-
-    if args.version:
-        print("programming_tool version", downloader.get_version())
-        return 0
 
     if args.prepare:
         if not downloader.prepare_problems(args.prepare):
