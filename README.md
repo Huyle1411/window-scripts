@@ -17,8 +17,17 @@ A command-line tool to help with competitive programming tasks.
 - Compile/run C++ file. If `is_run == 1`, run after compile successful  
 `build <filename.cpp> <is_run: optional>`
 
-- Download sample test cases, make folder problem, ... For more information, run:  
-`cptool dl -h`  
+- Show help information.
+`cptool -h`
 
-- Test solution with sample test cases, support C++/Python/Java. If `is_debug_mode != 0`, always print input, actual_output and expected_output. Otherwise, print `Accepted/Wrong Answer`.   
-`cptool test <problem_folder_name> <language:cpp or py or java> <is_debug_mode: optional>`
+- Show version.of downloader.
+`cptool dl -v` or `dl -v`
+
+- Download sample test cases, make folder problem, ... For more information, run:  
+`cptool dl -h` or `dl -h`
+
+- Test solution with sample test cases, support C++/Python/Java. If `is_debug_mode != 0`, always print input, actual_output and expected_output. Otherwise, only print input and output in case of wrong answer.
+`cptool test <problem_folder_name> <language:cpp or py or java> <is_debug_mode: optional>` or `test <problem_folder_name> <language:cpp or py or java> <is_debug_mode: optional>`
+
+- Run solution with input file.
+`cptool run <input_file_path> <language:cpp or py or java>` or `run <input_file_path> <language:cpp or py or java>`
