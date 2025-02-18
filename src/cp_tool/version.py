@@ -8,6 +8,11 @@ class Version:
     minor: int
     patch: int
 
+    @classmethod
+    def from_string(cls, version_str: str) -> "Version":
+        major, minor, patch = map(int, version_str.split("."))
+        return cls(major=major, minor=minor, patch=patch)
+
     def __str__(self) -> str:
         return f"{self.major}.{self.minor}.{self.patch}"
 
@@ -16,5 +21,5 @@ class Version:
 
 
 # Current version
-CURRENT_VERSION = Version(2, 1, 0)
+CURRENT_VERSION = Version("2.1.0")
 VERSION = str(CURRENT_VERSION)
