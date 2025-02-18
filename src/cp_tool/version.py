@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from typing import Tuple
 import subprocess
-from pathlib import Path
 
 @dataclass
 class Version:

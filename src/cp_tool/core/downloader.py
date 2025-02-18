@@ -9,8 +9,8 @@ import re
 import shutil
 import sys
 
-from tools.config import *
-from src.version import CURRENT_VERSION  # or __version__ if using simple string
+from cp_tool.config import *
+from cp_tool.version import CURRENT_VERSION  # or __version__ if using simple string
 
 logger = logging.getLogger(__name__)
 

@@ -1,8 +1,21 @@
 [tool.poetry]
 name = "competitive-programming-tool"
-version = "2.0.0"
+version = "2.1.0"
 description = "Tool for competitive programming"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Huy Le <lqh1411@gmail.com>"]
+packages = [
+    { include = "cp_tool", from = "src" }
+]
 
 [tool.poetry.dependencies]
-python = "^3.8" 
+python = "^3.8"
+
+[tool.poetry.scripts]
+cptool = "cp_tool.cli:main"
+
+[tool.poetry.group.dev.dependencies]
+bump2version = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api" 
