@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.2.1] - 2024-02-22
+## [2.2.2] - 2025-02-22
+### Changed
+- Updated `config.py` to use `CP_TOOL_ROOT` environment variable 
+
+
+## [2.2.1] - 2025-02-22
 
 ### Changed
 - Make template path relative to project root instead of using absolute path

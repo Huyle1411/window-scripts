@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 VERSION = "2.0"
 HOST = "127.0.0.1"
@@ -13,7 +14,11 @@ RESET = "\033[0m"
 # File settings
 NAME_PATTERN = r"^(?:Problem )?([A-Z][0-9]*)\b"
 SUPPORTED_LANGUAGE_EXTENSION = ["cpp", "py", "java"]
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+PROJECT_ROOT = Path(os.getenv("CP_TOOL_ROOT"))
+if PROJECT_ROOT is None:
+    raise EnvironmentError(
+        "CP_TOOL_ROOT environment variable is not set. Please run setup.cmd first."
+    )
 TEMPLATE_PATH = PROJECT_ROOT / "template"
 
 # Logging

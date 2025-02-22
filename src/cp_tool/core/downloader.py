@@ -7,7 +7,6 @@ from typing import Optional
 import re
 import shutil
 import sys
-from cp_tool.config import PROJECT_ROOT
 from datetime import datetime
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
