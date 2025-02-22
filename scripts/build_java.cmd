@@ -21,6 +21,7 @@ if %ERRORLEVEL%==0 (
         echo -------------------------------------------
         java %FILENAME%
     )
+    exit /b 0
 ) else (
     echo Compilation failed!
     exit /b 1

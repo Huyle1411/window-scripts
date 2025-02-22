@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.1] - 2024-02-22
+
+### Changed
+- Make template path relative to project root instead of using absolute path
+- Improved build scripts error handling and environment setup:
+  - Added proper error code returns in build.cmd and build_java.cmd
+  - Fixed CP_TOOL_ROOT environment variable setup in setup.cmd
+  - Made template include path use CP_TOOL_ROOT instead of hardcoded path
+- Improved logging system:
+  - Added date-based log files (log_YYYY-MM-DD.txt)
+  - Created logs directory automatically if not exists
+  - Moved logs to project-level logs directory
+
+
 ## [2.2.0] - 2025-02-18
 
 ### Changed

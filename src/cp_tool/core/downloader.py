@@ -7,6 +7,8 @@ from typing import Optional
 import re
 import shutil
 import sys
+from cp_tool.config import PROJECT_ROOT
+from datetime import datetime
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
@@ -65,7 +67,10 @@ class CompetitiveCompanionHandler(SimpleHTTPRequestHandler):
 
 class TestCaseDownloader:
     def __init__(self):
-        self.init_logger("log.txt")
+        log_dir = PROJECT_ROOT / "logs"
+        log_dir.mkdir(exist_ok=True)  # Create logs directory if it doesn't exist
+        log_filename = f"log_{datetime.now().strftime('%Y-%m-%d')}.txt"
+        self.init_logger(log_dir / log_filename)
         self.version = VERSION
 
     @staticmethod

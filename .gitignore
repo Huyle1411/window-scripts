@@ -6,8 +6,9 @@ __pycache__/
 .Python
 
 # Logs
+logs/
 *.log
-log.txt
+*.txt
 
 # Poetry
 poetry.lock
