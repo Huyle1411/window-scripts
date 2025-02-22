@@ -13,7 +13,8 @@ RESET = "\033[0m"
 # File settings
 NAME_PATTERN = r"^(?:Problem )?([A-Z][0-9]*)\b"
 SUPPORTED_LANGUAGE_EXTENSION = ["cpp", "py", "java"]
-TEMPLATE_PATH = Path("D:/3.Personal/CompetitiveProgramming/template/")
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+TEMPLATE_PATH = PROJECT_ROOT / "template"
 
 # Logging
 LOG_FORMAT = "%(asctime)s [%(levelname)s] %(funcName)s(): %(lineno)d  %(message)s"
