@@ -9,21 +9,21 @@ using i64 = long long;
 #endif
 
 class Solution {
-public:
-    void solve() {
+ public:
+  void solve() {
 
-    }
+  }
 };
 
 int32_t main() {
-    std::cin.tie(nullptr)->sync_with_stdio(false);
-    std::cin.exceptions(std::cin.failbit);
+  std::cin.tie(nullptr)->sync_with_stdio(false);
+  std::cin.exceptions(std::cin.failbit);
 
-    int tests = 1;
-    std::cin >> tests;
-    while (tests--) {
-        Solution solution;
-        solution.solve();
-    }
-    return 0;
+  int tests = 1;
+  std::cin >> tests;
+  while (tests--) {
+    Solution solution;
+    solution.solve();
+  }
+  return 0;
 }
