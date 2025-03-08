@@ -67,3 +67,4 @@ if __name__ == "__main__":
 
     subfolder = sys.argv[1]
     lang = sys.argv[2]
+    run_program(subfolder, lang)
