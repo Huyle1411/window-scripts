@@ -136,7 +136,20 @@ class TestCaseDownloader:
                 solution_file = problem_path / f"{problem_name}.{ext}"
                 if not solution_file.exists():
                     try:
-                        shutil.copy(TEMPLATE_PATH / f"template.{ext}", solution_file)
+                        template_path = TEMPLATE_PATH / f"template.{ext}"
+                        if ext == "java":
+                            template_content = template_path.read_text()
+                            template_content = re.sub(
+                                r"class\s+Template",
+                                f"class {problem_name}",
+                                template_content,
+                            )
+                            solution_file.write_text(template_content)
+                            logger.info(
+                                f"Created solution file with updated class name: {solution_file}"
+                            )
+                        else:
+                            shutil.copy(template_path, solution_file)
                     except FileNotFoundError:
                         logger.error(f"Template file not found: template.{ext}")
 
