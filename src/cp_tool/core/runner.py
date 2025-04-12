@@ -18,7 +18,7 @@ def print_output(output):
 
 
 def run_program(subfolder, lang):
-    file_name = subfolder + "\\" + subfolder
+    file_name = subfolder + "\\Main" 
     execute_file = file_name + "." + lang
 
     # Compile if needed
@@ -43,7 +43,7 @@ def run_program(subfolder, lang):
             print(f"Error running: {e}")
             return
 
-        execute_file = "java -cp " + subfolder + " " + subfolder
+        execute_file = "java -cp " + subfolder + " Main"
 
     output_file = os.path.join("temp_output.res")
 

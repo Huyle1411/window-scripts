@@ -73,7 +73,7 @@ class SolutionTester:
             res_file.unlink()
 
         # Prepare execution command
-        execute_cmd = self.compile_if_needed(problem_dir / problem_dir.name, lang)
+        execute_cmd = self.compile_if_needed(problem_dir / "Main", lang)
         if not execute_cmd:
             return
 
