@@ -77,7 +77,7 @@ class SolutionTester:
         if not execute_cmd:
             return
 
-        index = 1
+        index, correct = 1, 0
         while True:
             input_file = test_dir / f"{file_pattern.format(index=index)}.in"
             expected_file = test_dir / f"{file_pattern.format(index=index)}.out"
@@ -100,14 +100,20 @@ class SolutionTester:
                 return
 
             if self.compare_files(expected_file, actual_file):
-                print(f"Test case {index}:\033[92mAccepted\033[0m")
+                correct += 1
+                print(f"Test case {index}: \033[92mAccepted\033[0m")
                 if self.debug:
                     self.print_io_file(input_file, actual_file, expected_file)
             else:
-                print(f"Test case {index}:\033[91mWrong Answer\033[0m")
+                print(f"Test case {index}: \033[91mWrong Answer\033[0m")
                 self.print_io_file(input_file, actual_file, expected_file)
 
             index += 1
+        
+        if index == 1:
+            print("No test cases found")
+        else:
+            print(f"\033[92m{correct}/{index - 1}\033[0m test cases passed")
 
 
 def main():
