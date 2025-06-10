@@ -63,6 +63,16 @@ class SolutionTester:
             except subprocess.CalledProcessError as e:
                 print(f"Error compiling java: {e}")
                 return None
+        elif lang == "kt":
+            try:
+                command = f"build_kotlin.cmd {file_path}.kt"
+                result = subprocess.run(command, shell=True)
+                if result.returncode != 0:
+                    return None
+                return f"java -jar {file_path}.jar"
+            except subprocess.CalledProcessError as e:
+                print(f"Error compiling kotlin: {e}")
+                return None
         else:  # Python or other interpreted languages
             return str(file_path) + "." + lang
 
